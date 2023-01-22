@@ -1,7 +1,5 @@
 # TXT2CSV
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FRom1-J%2FTXT2CSV.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FRom1-J%2FTXT2CSV?ref=badge_shield)
-
-
 [![Github release action](https://github.com/Rom1-J/TXT2CSV/workflows/Release/badge.svg)](https://github.com/Rom1-J/TXT2CSV/actions?query=workflow%3ARelease)
 [![Github commit action](https://github.com/Rom1-J/TXT2CSV/workflows/Building/badge.svg)](https://github.com/Rom1-J/TXT2CSV/actions?query=workflow%3AGo)
 
@@ -47,14 +45,14 @@ $ ./txt2csv -h
 ## Examples
 
 ```bash
-$ time ./main -input=example/input.txt -regex="(?P<uuid_a>(?:[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12})):(?P<random>(?:\w|\s|\:)+):(?P<uuid_b>(?:[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}))" -threads=48 -output=example/result.csv
+$ time ./txt2csv -input=extra/example/input.txt -regex="(?P<uuid_a>(?:[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12})):(?P<random>(?:\w|\s|\:)+):(?P<uuid_b>(?:[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}))" -threads=48 -output=extra/example/result.csv
 # CSV header: [uuid_a random uuid_b garbage]
 # Regex: (?P<uuid_a>(?:[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12})):(?P<random>(?:\w|\s|\:)+):(?P<uuid_b>(?:[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}))
 # Threads: 48
 # Done!
-# ./main -input=example/input.txt  -threads=48 -output=example/result.csv  0.06s user 0.00s system 450% cpu 0.015 total
+# ./txt2csv -input=extra/example/input.txt  -threads=48 -output=extra/example/result.csv  0.06s user 0.00s system 450% cpu 0.015 total
 
-$ cd example
+$ cd extra/example
 $ python verify.py
 # Test passed!
 ```
