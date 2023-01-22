@@ -1,4 +1,6 @@
 # TXT2CSV
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FRom1-J%2FTXT2CSV.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FRom1-J%2FTXT2CSV?ref=badge_shield)
+
 
 [![Github release action](https://github.com/Rom1-J/TXT2CSV/workflows/Release/badge.svg)](https://github.com/Rom1-J/TXT2CSV/actions?query=workflow%3ARelease)
 [![Github commit action](https://github.com/Rom1-J/TXT2CSV/workflows/Building/badge.svg)](https://github.com/Rom1-J/TXT2CSV/actions?query=workflow%3AGo)
@@ -75,3 +77,7 @@ Runs:
 + `135.09s user 3.39s system 1080% cpu 12.820 total`
 + `136.42s user 3.61s system 1087% cpu 12.879 total`
 + `136.58s user 3.48s system 1083% cpu 12.927 total`
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FRom1-J%2FTXT2CSV.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FRom1-J%2FTXT2CSV?ref=badge_large)
