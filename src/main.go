@@ -8,9 +8,12 @@ import (
 	"sync"
 )
 
-var numWorkers = 48
+func process(flags Flags) {
+	inputFile := flags.inputFile
+	outputFile := flags.outputFile
+	regex := flags.regex
+	threads := flags.threads
 
-func process(inputFile string, outputFile string, regex string) {
 	file, err := os.Open(inputFile)
 	if err != nil {
 		panic(err)
@@ -25,6 +28,7 @@ func process(inputFile string, outputFile string, regex string) {
 	re := regexp.MustCompile(regex)
 
 	rePatterns := re.SubexpNames()[1:]
+	patternsLength := len(rePatterns)
 	rePatterns = append(rePatterns, "garbage")
 
 	writer, err := ParallelCsvWriter(outputFile)
@@ -36,12 +40,13 @@ func process(inputFile string, outputFile string, regex string) {
 
 	fmt.Printf("CSV header: %s\n", rePatterns)
 	fmt.Printf("Regex: %s\n", re)
+	fmt.Printf("Threads: %d\n", threads)
 
 	var wg sync.WaitGroup
 
 	lines := make(chan string)
 
-	for i := 0; i < numWorkers; i++ {
+	for i := 0; i < threads; i++ {
 		wg.Add(1)
 		go func(i int) {
 			var bufferedLines [][]string
@@ -49,23 +54,19 @@ func process(inputFile string, outputFile string, regex string) {
 			for line := range lines {
 				match := re.FindStringSubmatch(line)
 
-				if len(match) == 5 {
+				if len(match) == (patternsLength + 1) {
 					bufferedLines = append(bufferedLines, match[1:])
 				} else {
-					bufferedLines = append(bufferedLines, []string{"", "", "", "", line})
+					bufferedLines = append(bufferedLines, append(make([]string, patternsLength), line))
 				}
 
 				if len(bufferedLines)%15_000 == 0 {
 					writer.WriteAll(bufferedLines)
-					//fmt.Printf("Thread #%02d >> added %d lines\n", i, len(bufferedLines))
-
 					bufferedLines = [][]string{}
 				}
 			}
 
 			writer.WriteAll(bufferedLines)
-			//fmt.Printf("Thread #%02d >> added %d lines\n", i, len(bufferedLines))
-
 			wg.Done()
 		}(i)
 	}
@@ -80,23 +81,10 @@ func process(inputFile string, outputFile string, regex string) {
 }
 
 func main() {
-	if len(os.Args) < 4 {
-		fmt.Printf("Usage: %s <input_file> <output_file> <regex>\n", os.Args[0])
-		os.Exit(1)
-	}
+	flags := GetFlags()
+	CheckFlags(flags)
 
-	file, err := os.Open(os.Args[1])
-	if err != nil {
-		panic(err)
-	}
-	defer func(file *os.File) {
-		err := file.Close()
-		if err != nil {
-			panic(err)
-		}
-	}(file)
-
-	process(os.Args[1], os.Args[2], os.Args[3])
+	process(flags)
 
 	fmt.Println("Done!")
 }

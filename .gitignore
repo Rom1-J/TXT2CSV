@@ -93,7 +93,10 @@ fabric.properties
 
 data/*
 !data/.gitkeep
+
 output/*
 !output/.gitkeep
+
+example/result.csv
 
 main
