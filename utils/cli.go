@@ -1,12 +1,12 @@
-package main
+package utils
 
 import "flag"
 
 type Flags struct {
-	inputFile  string
-	outputFile string
-	regex      string
-	threads    int
+	InputFile  string
+	OutputFile string
+	Regex      string
+	Threads    int
 }
 
 func GetFlags() Flags {
@@ -19,9 +19,9 @@ func GetFlags() Flags {
 	flag.Parse()
 
 	return Flags{
-		inputFile:  *inputFile,
-		outputFile: *outputFile,
-		regex:      *regex,
-		threads:    *threads,
+		InputFile:  *inputFile,
+		OutputFile: *outputFile,
+		Regex:      *regex,
+		Threads:    *threads,
 	}
 }

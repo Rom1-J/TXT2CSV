@@ -1,4 +1,4 @@
-package main
+package utils
 
 import (
 	"fmt"
@@ -8,7 +8,7 @@ import (
 
 func CheckFlags(flags Flags) {
 	// Check input file exists
-	file, err := os.Open(flags.inputFile)
+	file, err := os.Open(flags.InputFile)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
@@ -21,14 +21,14 @@ func CheckFlags(flags Flags) {
 	}(file)
 
 	// Check regex has named patterns
-	re := regexp.MustCompile(flags.regex)
+	re := regexp.MustCompile(flags.Regex)
 	if len(re.SubexpNames()[1:]) == 0 {
 		fmt.Println("Regex does not contain groups or named patterns.")
 		os.Exit(1)
 	}
 
 	// Check threads positivity
-	if flags.threads <= 0 {
+	if flags.Threads <= 0 {
 		fmt.Println("Threads must be 1 or greater.")
 		os.Exit(1)
 	}

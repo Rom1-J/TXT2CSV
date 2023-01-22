@@ -6,13 +6,15 @@ import (
 	"os"
 	"regexp"
 	"sync"
+
+	"github.com/Rom1-J/TXT2CSV/utils"
 )
 
-func process(flags Flags) {
-	inputFile := flags.inputFile
-	outputFile := flags.outputFile
-	regex := flags.regex
-	threads := flags.threads
+func process(flags utils.Flags) {
+	inputFile := flags.InputFile
+	outputFile := flags.OutputFile
+	regex := flags.Regex
+	threads := flags.Threads
 
 	file, err := os.Open(inputFile)
 	if err != nil {
@@ -31,7 +33,7 @@ func process(flags Flags) {
 	patternsLength := len(rePatterns)
 	rePatterns = append(rePatterns, "garbage")
 
-	writer, err := ParallelCsvWriter(outputFile)
+	writer, err := utils.ParallelCsvWriter(outputFile)
 	if err != nil {
 		panic(err)
 	}
@@ -81,8 +83,8 @@ func process(flags Flags) {
 }
 
 func main() {
-	flags := GetFlags()
-	CheckFlags(flags)
+	flags := utils.GetFlags()
+	utils.CheckFlags(flags)
 
 	process(flags)
 

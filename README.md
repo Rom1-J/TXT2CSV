@@ -1,13 +1,34 @@
 # TXT2CSV
 
+[![Github release action](https://github.com/Rom1-J/TXT2CSV/workflows/Release/badge.svg)](https://github.com/Rom1-J/TXT2CSV/actions?query=workflow%3ARelease)
+[![Github commit action](https://github.com/Rom1-J/TXT2CSV/workflows/Building/badge.svg)](https://github.com/Rom1-J/TXT2CSV/actions?query=workflow%3AGo)
+
 Script to convert large `.txt` files (or any other format) to `.csv` via a regular expression.
+
+---
+
+## Installation 
+
+### From Sources
+
+```bash
+$ git clone https://github.com/Rom1-J/TXT2CSV
+$ cd TXT2CSV
+$ make build  # assuming you already have go installed on your system
+```
+
+Then you can find the executable inside `dist/` directory.
+
+### From Builds
+
+- [Download the latest release](https://github.com/Rom1-J/TXT2CSV/releases/latest) compatible with your system 
 
 ---
 
 ## Usage
 
 ```bash
-$ ./main -h                                                                                                                                                                                     [±master ✓]
+$ ./txt2csv -h
 # Usage of ./main:
 #   -input string
 #         Input file
@@ -17,14 +38,6 @@ $ ./main -h                                                                     
 #         Regex to use
 #   -threads int
 #         Number of threads to use (default 12)
-```
-
----
-
-## Build
-
-```bash
-$ make build
 ```
 
 ---

@@ -91,12 +91,12 @@ fabric.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/goland+all
 
-data/*
-!data/.gitkeep
+extra/data/*
+!extra/data/.gitkeep
 
-output/*
-!output/.gitkeep
+extra/output/*
+!extra/output/.gitkeep
 
-example/result.csv
+extra/example/result.csv
 
 main
