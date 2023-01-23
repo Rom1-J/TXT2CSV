@@ -99,4 +99,4 @@ extra/output/*
 
 extra/example/result.csv
 
-main
+dist/*
