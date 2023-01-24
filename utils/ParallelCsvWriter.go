@@ -12,11 +12,16 @@ type CsvWriter struct {
 }
 
 func ParallelCsvWriter(fileName string) (*CsvWriter, error) {
-	csvFile, err := os.Create(fileName)
-	if err != nil {
-		return nil, err
+	if fileName != "" {
+		csvFile, err := os.Create(fileName)
+		if err != nil {
+			return nil, err
+		}
+		w := csv.NewWriter(csvFile)
+		return &CsvWriter{csvWriter: w, mutex: &sync.Mutex{}}, nil
 	}
-	w := csv.NewWriter(csvFile)
+
+	w := csv.NewWriter(os.Stdout)
 	return &CsvWriter{csvWriter: w, mutex: &sync.Mutex{}}, nil
 }
 

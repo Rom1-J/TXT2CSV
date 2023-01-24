@@ -33,6 +33,8 @@ func process(flags utils.Flags) {
 	patternsLength := len(rePatterns)
 	rePatterns = append(rePatterns, "garbage")
 
+	var wg sync.WaitGroup
+
 	writer, err := utils.ParallelCsvWriter(outputFile)
 	if err != nil {
 		panic(err)
@@ -40,11 +42,11 @@ func process(flags utils.Flags) {
 
 	writer.Write(rePatterns)
 
-	fmt.Printf("CSV header: %s\n", rePatterns)
-	fmt.Printf("Regex: %s\n", re)
-	fmt.Printf("Threads: %d\n", threads)
-
-	var wg sync.WaitGroup
+	if outputFile != "" {
+		fmt.Printf("CSV header: %s\n", rePatterns)
+		fmt.Printf("Regex: %s\n", re)
+		fmt.Printf("Threads: %d\n", threads)
+	}
 
 	lines := make(chan string)
 
@@ -88,5 +90,7 @@ func main() {
 
 	process(flags)
 
-	fmt.Println("Done!")
+	if flags.OutputFile != "" {
+		fmt.Println("Done!")
+	}
 }
