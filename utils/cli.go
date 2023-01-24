@@ -26,7 +26,7 @@ func getRegex(regex string) string {
 func GetFlags() Flags {
 	inputFile := flag.String("input", "", "Input file")
 	outputFile := flag.String("output", "", "Output file (default \"stdout\")")
-	regex := flag.String("regex", "", "Regex to use")
+	regex := flag.String("regex", "", "Regex or file path to it, to use")
 
 	threads := flag.Int("threads", 12, "Number of threads to use")
 

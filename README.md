@@ -33,7 +33,7 @@ $ ./txt2csv -h
 #   -input string
 #         Input file
 #   -output string
-#         Output file (default "output.csv")
+#         Output file (default "stdout")
 #   -regex string
 #         Regex to use
 #   -threads int
