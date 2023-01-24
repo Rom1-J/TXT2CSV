@@ -2,6 +2,7 @@ package utils
 
 import (
 	"flag"
+	"os"
 	"runtime"
 	"strings"
 )
@@ -13,6 +14,15 @@ type Flags struct {
 	Threads    int
 }
 
+func getRegex(regex string) string {
+	content, err := os.ReadFile(regex)
+	if err != nil {
+		return regex
+	}
+
+	return strings.TrimSuffix(string(content), "\n")
+}
+
 func GetFlags() Flags {
 	inputFile := flag.String("input", "", "Input file")
 	outputFile := flag.String("output", "", "Output file (default \"stdout\")")
@@ -21,6 +31,8 @@ func GetFlags() Flags {
 	threads := flag.Int("threads", 12, "Number of threads to use")
 
 	flag.Parse()
+
+	*regex = getRegex(*regex)
 
 	if runtime.GOOS == "windows" {
 		return Flags{
